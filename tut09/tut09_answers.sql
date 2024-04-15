@@ -116,33 +116,33 @@ WHERE mr.role = 'CaptainKeeper' AND mr.match_id = mr.match_winner
 ORDER BY p.player_name;
 -- 17.List the names of all players and their runs scored (who have scored at least 50 runs in any match).
 -- Order result in decreasing order of runs scored. Resolve ties alphabetically.
-SELECT p.player_name, SUM(rs.runs_scored) AS runs_scored 
-FROM runs_scored rs 
-JOIN players p ON rs.striker = p.player_id 
-GROUP BY p.player_name 
-HAVING SUM(rs.runs_scored) >= 50 
-ORDER BY runs_scored DESC, p.player_name;
+-- SELECT p.player_name, SUM(rs.runs_scored) AS runs_scored 
+-- FROM runs_scored rs 
+-- JOIN players p ON rs.striker = p.player_id 
+-- GROUP BY p.player_name 
+-- HAVING SUM(rs.runs_scored) >= 50 
+-- ORDER BY runs_scored DESC, p.player_name;
 -- 18.List the player names who scored a century but their teams lost the match. Order results alphabetically.
-SELECT p.player_name 
-FROM runs_scored rs 
-JOIN players p ON rs.striker = p.player_id 
-JOIN matches m ON rs.match_id = m.match_id 
-WHERE rs.runs_scored >= 100 AND rs.innings_no = m.match_winner 
-ORDER BY p.player_name;
+-- SELECT p.player_name 
+-- FROM runs_scored rs 
+-- JOIN players p ON rs.striker = p.player_id 
+-- JOIN matches m ON rs.match_id = m.match_id 
+-- WHERE rs.runs_scored >= 100 AND rs.innings_no = m.match_winner 
+-- ORDER BY p.player_name;
 -- 19.List match ids and venues where KKR has lost the game. Order result in increasing order of match ids.
-SELECT m.match_id, m.venue 
-FROM matches m 
-JOIN teams t ON m.match_winner = t.team_id 
-WHERE t.name != 'KKR' 
-ORDER BY m.match_id;
+-- SELECT m.match_id, m.venue 
+-- FROM matches m 
+-- JOIN teams t ON m.match_winner = t.team_id 
+-- WHERE t.name != 'KKR' 
+-- ORDER BY m.match_id;
 -- 20.List the names of top 10 players who have the best batting average in season 5. 
 -- Batting average can be calculated according to the following formula:
-SELECT p.player_name 
-FROM ball_by_ball bbb 
-JOIN players p ON bbb.striker = p.player_id 
-JOIN matches m ON bbb.match_id = m.match_id 
-WHERE m.season_id = 5 
-GROUP BY bbb.striker 
-ORDER BY SUM(bbb.runs_scored) / COUNT(DISTINCT CONCAT(bbb.match_id, bbb.innings_no)) DESC, p.player_name 
-LIMIT 10;
+-- SELECT p.player_name 
+-- FROM ball_by_ball bbb 
+-- JOIN players p ON bbb.striker = p.player_id 
+-- JOIN matches m ON bbb.match_id = m.match_id 
+-- WHERE m.season_id = 5 
+-- GROUP BY bbb.striker 
+-- ORDER BY SUM(bbb.runs_scored) / COUNT(DISTINCT CONCAT(bbb.match_id, bbb.innings_no)) DESC, p.player_name 
+-- LIMIT 10;
 
